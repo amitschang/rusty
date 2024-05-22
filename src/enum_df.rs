@@ -38,18 +38,19 @@ impl Column {
     }
 
     pub fn is_numeric(&self) -> bool {
-        match self {
-            Column::D(_) | Column::F(_) | Column::I(_) => true,
-            _ => false,
-        }
+        matches!(self, Column::D(_) | Column::F(_) | Column::I(_))
     }
 
     pub fn len(&self) -> usize {
         forward_op!(self, Vec::len)
     }
 
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 }
 
+#[derive(Default)]
 pub struct DataFrame {
     len: usize,
     columns: HashMap<String, Column>,
@@ -57,7 +58,7 @@ pub struct DataFrame {
 
 impl DataFrame {
     pub fn new() -> DataFrame {
-        return DataFrame{len: 0, columns: HashMap::new()}
+        DataFrame{len: 0, columns: HashMap::new()}
     }
 
     pub fn addcol(&mut self, name: &str, data: Column) -> Result<(), &str> {

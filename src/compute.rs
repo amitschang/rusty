@@ -1,7 +1,6 @@
 //! A few examples of parallel processing single arrays by chunk
 
 use std::ops::{Add, AddAssign};
-use std::sync::Arc;
 use std::thread;
 
 pub fn process_array(arr: &mut [f32]) {
