@@ -71,12 +71,10 @@ impl WorkUnit<'_> {
 
 /// work scheduling for iterative splits of input dataframe. Sends vectors of
 /// mutable slices (representing split nodes of dataframe) through channels to
-/// thread pool. Right now does this a fixed number of times for demo, presumably
-/// could:
+/// thread pool.
 ///
-/// * loop forever in thread but have stopping condition (e.g. leaf size)
-/// * wrap df in struct that tracks dimension, in order to split on another one
-///   in subsequent iterations
+/// TODO:
+///
 /// * write tree structure after finding split
 pub fn par_mut_sorter_multi_arr(arr: &mut Vec<Vec<i32>>) {
     let (send, recv) = mpsc::channel();
