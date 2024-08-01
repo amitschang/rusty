@@ -118,13 +118,6 @@ pub fn par_mut_sorter_multi_arr(arr: &mut Vec<Vec<i32>>) {
         };
         send.send(init).unwrap();
     });
-    let recv_u = recv.lock().unwrap();
-    loop {
-        match recv_u.try_recv() {
-            Ok(a) => println!("got arr chunk: {:?}", a),
-            Err(_) => break,
-        }
-    }
 }
 
 #[cfg(test)]
